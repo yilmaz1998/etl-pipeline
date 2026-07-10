@@ -1,10 +1,9 @@
 import fs from 'fs';
 import path from 'path';
 import csv from 'csv-parser';
-import type { DataRow } from "../types/types.ts";
 
 
-export function extract(fileName: string): Promise<DataRow[]> {
+export function extract<T>(fileName: string): Promise<T[]> {
     const filePath = path.join(
         process.cwd(),
         "data",
@@ -12,12 +11,12 @@ export function extract(fileName: string): Promise<DataRow[]> {
         fileName
     )
 
-    const results: DataRow[] = [];
+    const results: T[] = [];
 
     return new Promise((resolve, reject) => {
         fs.createReadStream(filePath)
             .pipe(csv())
-            .on('data', (data: DataRow) => results.push(data))
+            .on('data', (data: T) => results.push(data))
             .on('end', () => {
                 resolve(results);
             })

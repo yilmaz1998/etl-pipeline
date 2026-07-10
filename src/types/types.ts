@@ -20,3 +20,14 @@ export type DataRow = {
     shipping_delay: number;
     campaign: string | null;
   }
+
+  export type CustomerFeedbackRecord = {
+    feedback_date: string;
+    customer_segment: string;
+    rating: number;
+    nps_score: number;
+    customer_sentiment: string;
+    delivery_experience: string;
+    product_quality: string;
+    returned: boolean;
+};
