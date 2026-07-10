@@ -1,4 +1,4 @@
-import type { DataRow } from "../types/types.js";
+import type { DataRow } from "../../types/types.js";
 
 
 export function validateRow(row: DataRow): boolean {

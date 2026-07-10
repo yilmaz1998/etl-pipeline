@@ -1,5 +1,5 @@
-import type { DataRow, SalesRecord } from "../types/types.ts";
-import { validateRow } from "./validation.js";
+import type { DataRow, SalesRecord } from "../../types/types.js";
+import { validateRow } from "../validation/salesValidation.js";
 
 export function transform(data: DataRow[]): SalesRecord[] {
     return data.filter(validateRow).map((row) => {
