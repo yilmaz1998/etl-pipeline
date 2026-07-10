@@ -1,8 +1,11 @@
 import { extract } from "./etl/extract.js";
 import { transform } from "./etl/transform.js";
+import { load } from "./etl/load.js";
 
 const data = await extract("sales.csv");
 
-const transformed = transform(data);
+const transformedData = transform(data);
 
-console.log(transformed[0]);
+await load(transformedData);
+
+console.log("ETL pipeline completed successfully");

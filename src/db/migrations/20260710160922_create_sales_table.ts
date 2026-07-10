@@ -19,7 +19,7 @@ export async function up(knex: Knex): Promise<void> {
         table.integer("support_tickets").notNullable();
         table.integer("inventory_score").notNullable();
         table.integer("shipping_delay").notNullable();
-        table.string("campaign", 100).notNullable();
+        table.string("campaign", 100).nullable();
 },
     );
 }
