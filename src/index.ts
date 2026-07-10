@@ -1,11 +1,18 @@
 import { extract } from "./etl/extract.js";
-import { transform } from "./etl/transform/salesTransform.js";
+import { transform } from "./etl/transform/customerFeedbackTransform.js";
 import { load } from "./etl/load.js";
+import type { DataRow } from "./types/types.js";
 
-const data = await extract("sales.csv");
+
+const data = await extract<DataRow>(
+    "customer_feedback.csv"
+);
 
 const transformedData = transform(data);
 
-await load(transformedData);
+await load(
+    "customer_feedback",
+    transformedData
+);
 
-console.log("ETL pipeline completed successfully");
+console.log("Customer feedback ETL completed successfully");

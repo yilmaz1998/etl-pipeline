@@ -23,7 +23,7 @@ export type DataRow = {
 
   export type CustomerFeedbackRecord = {
     feedback_date: string;
-    customer_segment: string;
+    customer_type: string;
     rating: number;
     nps_score: number;
     customer_sentiment: string;
