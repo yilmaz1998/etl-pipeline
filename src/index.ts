@@ -1,18 +1,21 @@
-import { extract } from "./etl/extract.js";
-import { transformInventory } from "./etl/transform/inventoryTransform.js";
-import { load } from "./etl/load.js";
-import type { DataRow } from "./types/types.js";
+import { runSalesPipeline } from "./pipelines/salesPipeline.js";
+import { runCustomerFeedbackPipeline } from "./pipelines/customerFeedbackPipeline.js";
+import { runInventoryPipeline } from "./pipelines/inventoryPipeline.js";
 
 
-const data = await extract<DataRow>(
-    "inventory.csv"
-);
+async function runETL() {
+    try {
+        await runSalesPipeline()
 
-const transformedData = transformInventory(data);
+        await runCustomerFeedbackPipeline()
 
-await load(
-    "inventory",
-    transformedData
-);
+        await runInventoryPipeline()
 
-console.log("Customer feedback ETL completed successfully");
+        console.log("All ETL pipelines completed successfully")
+
+    } catch (error) {
+        console.error("ETL failed:", error)
+    }
+}
+
+runETL()

@@ -2,7 +2,7 @@ import type { DataRow, InventoryRecord } from "../../types/types.js";
 import { validateInventoryRow } from "../validation/inventoryValidation.js";
 
 
-export function transformInventory(data: DataRow[]): InventoryRecord[] {
+export function transform(data: DataRow[]): InventoryRecord[] {
     return data.filter(validateInventoryRow).map((row) => {
         return {
             inventory_date: row.date!,
