@@ -1,17 +1,17 @@
 import { extract } from "./etl/extract.js";
-import { transform } from "./etl/transform/customerFeedbackTransform.js";
+import { transformInventory } from "./etl/transform/inventoryTransform.js";
 import { load } from "./etl/load.js";
 import type { DataRow } from "./types/types.js";
 
 
 const data = await extract<DataRow>(
-    "customer_feedback.csv"
+    "inventory.csv"
 );
 
-const transformedData = transform(data);
+const transformedData = transformInventory(data);
 
 await load(
-    "customer_feedback",
+    "inventory",
     transformedData
 );
 
