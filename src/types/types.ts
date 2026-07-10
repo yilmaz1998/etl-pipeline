@@ -31,3 +31,14 @@ export type DataRow = {
     product_quality: string;
     returned: boolean;
 };
+
+export type InventoryRecord = {
+  inventory_date: string;
+  warehouse_location: string;
+  product_category: string;
+  stock_quantity: number;
+  is_out_of_stock: boolean;
+  restock_days: number;
+  supplier_delay_days: number;
+  damaged_item_count: number;
+};
