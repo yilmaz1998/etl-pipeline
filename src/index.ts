@@ -1,5 +1,8 @@
 import { extract } from "./etl/extract.js";
+import { transform } from "./etl/transform.js";
 
 const data = await extract("sales.csv");
 
-console.log(data.slice(0, 2));
+const transformed = transform(data);
+
+console.log(transformed[0]);

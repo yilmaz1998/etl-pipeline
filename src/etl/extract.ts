@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import csv from 'csv-parser';
-import type { DataRow } from "../types/sales.ts";
+import type { DataRow } from "../types/types.ts";
 
 
 export function extract(fileName: string): Promise<DataRow[]> {
