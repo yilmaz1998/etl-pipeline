@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx src/index.ts",
+    "etl": "tsx src/index.ts",
     "knex": "tsx ./node_modules/knex/bin/cli.js"
   },
   "keywords": [],
