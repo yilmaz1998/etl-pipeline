@@ -1,8 +1,15 @@
 import type { DataRow, CustomerFeedbackRecord } from "../../types/types.js";
 import { validateCustomerFeedbackRow } from "../validation/customerFeedbackValidation.js";
+import { failedRecordsCounter } from "../../metrics.js";
 
 export function transform(data: DataRow[]): CustomerFeedbackRecord[] {
-    return data.filter(validateCustomerFeedbackRow).map((row) => {
+    const validData = data.filter(validateCustomerFeedbackRow);
+
+    const failedRecordsCount = data.length - validData.length;
+
+    failedRecordsCounter.inc({ pipeline: "customer_feedback" }, failedRecordsCount);
+
+    return validData.filter(validateCustomerFeedbackRow).map((row) => {
         return {
             feedback_date: row.date!,
             customer_type: row.customer_segment!,

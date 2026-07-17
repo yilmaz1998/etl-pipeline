@@ -21,6 +21,8 @@ export async function runSalesPipeline() {
 
         console.log("Sales ETL completed successfully")
 
+        return transformedData.length
+
     } catch (error) {
         console.error(
             "Sales ETL failed:",

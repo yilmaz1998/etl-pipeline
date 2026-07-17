@@ -21,6 +21,8 @@ export async function runCustomerFeedbackPipeline() {
         
         console.log("Customer Feedback ETL completed successfully")
 
+        return transformedData.length
+
     } catch (error) {
         console.error(
             "Customer Feedback ETL failed:",

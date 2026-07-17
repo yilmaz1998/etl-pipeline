@@ -1,9 +1,16 @@
 import type { DataRow, InventoryRecord } from "../../types/types.js";
 import { validateInventoryRow } from "../validation/inventoryValidation.js";
+import { failedRecordsCounter } from "../../metrics.js";
 
 
 export function transform(data: DataRow[]): InventoryRecord[] {
-    return data.filter(validateInventoryRow).map((row) => {
+    const validData = data.filter(validateInventoryRow);
+
+    const failedRecordsCount = data.length - validData.length;
+
+    failedRecordsCounter.inc({ pipeline: "inventory" }, failedRecordsCount);
+
+    return validData.map((row) => {
         return {
             inventory_date: row.date!,
             warehouse_location: row.warehouse!,

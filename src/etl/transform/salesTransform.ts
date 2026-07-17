@@ -1,9 +1,16 @@
 import type { DataRow, SalesRecord } from "../../types/types.js";
 import { validateRow } from "../validation/salesValidation.js";
+import { failedRecordsCounter } from "../../metrics.js";
 
 export function transform(data: DataRow[]): SalesRecord[] {
-    return data.filter(validateRow).map((row) => {
-        return {
+    const validData = data.filter(validateRow);
+    
+    const failedRecordsCount = data.length - validData.length;
+
+    failedRecordsCounter.inc({ pipeline: "sales" }, failedRecordsCount);
+    
+        return validData.map((row) => {
+            return {
             sale_date: row.date!,
             region: row.region!,
             category: row.category!,

@@ -22,6 +22,8 @@ export async function runInventoryPipeline() {
 
         console.log("Inventory ETL completed successfully")
 
+        return transformedData.length
+
     } catch (error) {
         console.error(
             "Inventory ETL failed:",
