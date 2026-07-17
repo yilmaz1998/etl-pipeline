@@ -23,7 +23,7 @@ resource "kubernetes_deployment" "etl" {
       spec {
         container {
           name  = "etl"
-          image = "etl-pipeline:v1"
+          image = "etl-pipeline:v2"
 
           image_pull_policy = "Never"
 

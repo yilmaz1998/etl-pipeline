@@ -1,3 +1,21 @@
+resource "kubernetes_persistent_volume_claim" "postgres" {
+  metadata {
+    name      = "postgres-pvc"
+    namespace = "etl"
+  }
+
+  spec {
+    access_modes = ["ReadWriteOnce"]
+
+    resources {
+      requests = {
+        storage = "1Gi"
+      }
+    }
+  }
+}
+
+
 resource "kubernetes_deployment" "postgres" {
   metadata {
     name      = "postgres"
@@ -42,6 +60,19 @@ resource "kubernetes_deployment" "postgres" {
 
           port {
             container_port = 5432
+          }
+
+          volume_mount {
+            name       = "postgres-storage"
+            mount_path = "/var/lib/postgresql/data"
+          }
+        }
+
+        volume {
+          name = "postgres-storage"
+
+          persistent_volume_claim {
+            claim_name = kubernetes_persistent_volume_claim.postgres.metadata[0].name
           }
         }
       }
