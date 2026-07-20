@@ -23,7 +23,11 @@ resource "kubernetes_deployment" "etl" {
       spec {
         container {
           name  = "etl"
-          image = "etl-pipeline:v2"
+          image = "etl-pipeline:v3"
+
+          port {
+            container_port = 3000
+          }
 
           image_pull_policy = "Never"
 
