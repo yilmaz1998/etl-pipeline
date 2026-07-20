@@ -19,6 +19,8 @@ The pipeline ingests multiple CSV datasets, validates and transforms the data, a
 - Kubernetes deployment using Terraform
 - PostgreSQL provisioning inside Kubernetes
 - Automated database migration workflow
+- Kubernetes ServiceMonitor for pipeline observability
+- Prometheus dashboard for pipeline observability
 
 ## Tech Stack
 
@@ -37,6 +39,7 @@ The pipeline ingests multiple CSV datasets, validates and transforms the data, a
 - Kubernetes
 - Terraform
 - Minikube
+- Prometheus
 
 ## Architecture
 
@@ -72,6 +75,8 @@ Kubernetes Cluster
     ├── PostgreSQL Pod
     |
     └── Migration Job
+    |
+    └── Prometheus
 ```
 
 ## Project Structure
