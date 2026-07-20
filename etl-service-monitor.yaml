@@ -1,0 +1,21 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: etl-service-monitor
+  namespace: monitoring
+  labels:
+    release: monitoring
+
+spec:
+  selector:
+    matchLabels:
+      app: etl
+
+  namespaceSelector:
+    matchNames:
+      - etl
+
+  endpoints:
+    - port: http
+      path: /metrics
+      interval: 15s
